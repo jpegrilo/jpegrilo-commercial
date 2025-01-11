@@ -1,39 +1,208 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Site de Pagamento</title>
+    <title>JPegrillo Commissions</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #333;
+            color: #fff;
+        }
+        header img {
+            border-radius: 50%;
+            width: 50px;
+        }
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 20px;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: #fff;
+        }
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: #f4f4f4;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            overflow-y: auto;
+            transition: 0.3s ease;
+        }
+        .sidebar.active {
+            right: 0;
+        }
+        .close-btn {
+            background: #ff5e57;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            float: right;
+        }
+        /* Portfolio buttons */
+        .portfolio-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .portfolio-buttons button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .portfolio-content {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .portfolio-content.active {
+            display: block;
+        }
+        .portfolio-content img {
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <h1>jp egrillo commissions</h1>
-    <p>Choose one of the products below to pay with Stripe or PayPal:</p>
+    <!-- Header -->
+    <header>
+        <div>
+            <img src="https://pbs.twimg.com/profile_images/1865224456660037632/dMjLqhX8_400x400.jpg" alt="JPegrilo">
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#" id="payment-button">Payment</a>
+        </nav>
+    </header>
 
-    <!-- Links de pagamento -->
-    <a href="https://buy.stripe.com/00g00e3aJ6Ny5PO000" target="_blank">
-        Headshot (US$ 45)
-    </a>
-    <br><br>
+    <!-- Home Section -->
+    <section id="home">
+        <h1>JPegrillo Commissions</h1>
+        <p>I am a digital illustrator. Explore my portfolio and choose the perfect art for you!</p>
+    </section>
 
-    <a href="https://buy.stripe.com/9AQeV83aJc7S920fZ3" target="_blank">
-        Halfbody (US$ 80)
-    </a>
-    <br><br>
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <p>Explore my art by category:</p>
+        <div class="portfolio-buttons">
+            <button data-category="headshot">Headshot</button>
+            <button data-category="halfbody">Halfbody</button>
+            <button data-category="fullbody">Fullbody</button>
+            <button data-category="refsheet">Refsheet</button>
+            <button data-category="fullart">Full Art</button>
+        </div>
+        <div id="portfolio-content">
+            <div class="portfolio-content" id="headshot">
+                <h3>Headshot</h3>
+                <img src="portfolio/headshot/placeholder.jpg" alt="Headshot">
+            </div>
+            <div class="portfolio-content" id="halfbody">
+                <h3>Halfbody</h3>
+                <img src="portfolio/halfbody/placeholder.jpg" alt="Halfbody">
+            </div>
+            <div class="portfolio-content" id="fullbody">
+                <h3>Fullbody</h3>
+                <img src="portfolio/fullbody/placeholder.jpg" alt="Fullbody">
+            </div>
+            <div class="portfolio-content" id="refsheet">
+                <h3>Refsheet</h3>
+                <img src="portfolio/refsheet/placeholder.jpg" alt="Refsheet">
+            </div>
+            <div class="portfolio-content" id="fullart">
+                <h3>Full Art</h3>
+                <img src="portfolio/fullart/placeholder.jpg" alt="Full Art">
+            </div>
+        </div>
+    </section>
 
-    <a href="https://buy.stripe.com/5kA4gu7qZgo8a643ce" target="_blank">
-        Fullbody (US$ 120)
-    </a>
-    <br><br>
+    <!-- Payment Sidebar -->
+    <div class="sidebar" id="payment-sidebar">
+        <button class="close-btn" id="close-sidebar">Close</button>
+        <h2>Payment Methods</h2>
+        <a href="https://buy.stripe.com/00g00e3aJ6Ny5PO000" class="button">Headshot - $45</a>
+        <a href="https://buy.stripe.com/9AQeV83aJc7S920fZ3" class="button">Halfbody - $80</a>
+        <a href="https://buy.stripe.com/5kA4gu7qZgo8a643ce" class="button">Fullbody - $120</a>
+        <a href="https://buy.stripe.com/eVa7sG9z72xidigaEH" class="button">Refsheet - $200</a>
+        <a href="https://buy.stripe.com/aEUcN03aJ1tedig6os" class="button">Full Art - $240</a>
+        <p>Other methods:</p>
+        <a href="https://www.paypal.com/myaccount" class="button">PayPal</a>
+        <a href="https://buy.stripe.com/exampleqr" class="button">Stripe QR Code</a>
+    </div>
 
-    <a href="https://buy.stripe.com/eVa7sG9z72xidigaEH" target="_blank">
-        Refsheet (US$ 200)
-    </a>
-    <br><br>
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 - JPegrillo Commissions. All rights reserved.</p>
+    </footer>
 
-    <a href="https://buy.stripe.com/aEUcN03aJ1tedig6os" target="_blank">
-        Full Art (US$ 240)
-    </a>
-    
+    <!-- Scripts -->
+    <script>
+        // Sidebar functionality
+        const paymentButton = document.getElementById('payment-button');
+        const sidebar = document.getElementById('payment-sidebar');
+        const closeSidebar = document.getElementById('close-sidebar');
+
+        paymentButton.addEventListener('click', () => {
+            sidebar.classList.add('active');
+        });
+
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
+
+        // Portfolio functionality
+        const portfolioButtons = document.querySelectorAll('.portfolio-buttons button');
+        const portfolioContent = document.querySelectorAll('.portfolio-content');
+
+        portfolioButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                portfolioContent.forEach(content => content.classList.remove('active'));
+                document.getElementById(button.dataset.category).classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
